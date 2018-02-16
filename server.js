@@ -102,8 +102,32 @@ const resolvers = {
     Mutation: {
         teste(obj, args, context, info) {
             return new Promise((resolve, reject) => {
-                console.log(args);
-                resolve('ok');
+                const input = JSON.parse(args.input);
+
+                return reject(new Error('cliente ja existe'));
+
+                //throw new Error('cliente ja existe');
+
+                console.log(input.nome);
+                resolve(
+                    JSON.stringify([
+                        {
+                            codigo: 123,
+                            nome: 'Tiago',
+                            endereco: 'Rua Teste',
+                        },
+                        {
+                            codigo: 123,
+                            nome: 'Tiago',
+                            endereco: 'Rua Teste',
+                        },
+                        {
+                            codigo: 123,
+                            nome: 'Tiago',
+                            endereco: 'Rua Teste',
+                        },
+                    ]),
+                );
             });
         },
     },

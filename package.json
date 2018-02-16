@@ -6,12 +6,13 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": "node server.js",
-        "dev": "cross-env NODE_ENV=production concurrently \"nodemon ./server.js\" \"webpack-dev-server --colors --progress\""
+        "dev": "cross-env NODE_ENV=development concurrently --raw \"nodemon ./server.js\" \"webpack-dev-server --colors --progress\""
     },
     "author": "",
     "license": "ISC",
     "dependencies": {
         "bluebird": "^3.5.1",
+        "colors": "^1.1.2",
         "compression": "^1.7.1",
         "express": "^4.16.2",
         "express-graphql": "^0.6.11",

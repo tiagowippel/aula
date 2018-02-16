@@ -117,7 +117,38 @@ const Teste = props => (
                 <RaisedButton
                     label="teste graphql"
                     onClick={e => {
-                        appStore.waitDialog--;
+                        appStore.waitDialog++;
+
+                        const obj = {
+                            codigo: 123,
+                            nome: 'Tiago',
+                            endereco: 'Rua Teste',
+                        };
+
+                        appStore.client
+                            .mutate({
+                                mutation: gql`
+                                    mutation($input: String!) {
+                                        teste(input: $input)
+                                    }
+                                `,
+                                variables: {
+                                    input: JSON.stringify(obj),
+                                },
+                                fetchPolicy: 'no-cache',
+                            })
+                            .then(res => {
+                                const obj = JSON.parse(res.data.teste);
+                                console.log(obj);
+                            })
+                            .catch(err => {
+                                console.error(err);
+                            })
+                            .finally(() => {
+                                appStore.waitDialog--;
+                            });
+
+                        return;
                         appStore.client
                             .query({
                                 query: gql`
